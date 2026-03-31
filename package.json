@@ -1,0 +1,24 @@
+{
+  "name": "@mia/cli",
+  "version": "0.1.0",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "mia": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@mia/shared-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}
