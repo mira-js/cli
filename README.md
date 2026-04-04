@@ -1,9 +1,9 @@
-# @mia/cli
+# @mira/cli
 
-[![npm](https://img.shields.io/npm/v/@mia/cli)](https://www.npmjs.com/package/@mia/cli)
-[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)](https://github.com/mira-js/mia-core/blob/main/LICENSE)
+[![npm](https://img.shields.io/npm/v/@mira/cli)](https://www.npmjs.com/package/@mira/cli)
+[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)](https://github.com/mira-js/mira-core/blob/main/LICENSE)
 
-Zero-install CLI for the MIA research API. Enqueues a research job, polls until it completes, and prints the result.
+Zero-install CLI for the MIRA research API. Enqueues a research job, polls until it completes, and prints the result.
 
 ---
 
@@ -12,14 +12,14 @@ Zero-install CLI for the MIA research API. Enqueues a research job, polls until 
 No install needed:
 
 ```bash
-npx @mia/cli research "<query>"
+npx @mira/cli research "<query>"
 ```
 
 Or install globally:
 
 ```bash
-npm install -g @mia/cli
-mia research "<query>"
+npm install -g @mira/cli
+mira research "<query>"
 ```
 
 ---
@@ -29,7 +29,7 @@ mia research "<query>"
 ### `research`
 
 ```
-mia research "<query>" [options]
+mira research "<query>" [options]
 
 Options:
   --depth   quick | deep     Research depth (default: quick)
@@ -37,10 +37,10 @@ Options:
   --help                     Show help
 
 Examples:
-  mia research "CRM pain points for small teams"
-  mia research "Notion alternatives" --depth deep
-  mia research "invoicing frustrations" --sources reddit,hackernews
-  mia research "B2B SaaS pricing anxiety" --depth deep --sources reddit
+  mira research "CRM pain points for small teams"
+  mira research "Notion alternatives" --depth deep
+  mira research "invoicing frustrations" --sources reddit,hackernews
+  mira research "B2B SaaS pricing anxiety" --depth deep --sources reddit
 ```
 
 **What it does:**
@@ -52,7 +52,7 @@ Examples:
 **Sample session:**
 
 ```
-$ mia research "indie founders switching from Stripe" --depth quick
+$ mira research "indie founders switching from Stripe" --depth quick
 
 Queuing research: "indie founders switching from Stripe" (depth: quick)
 Job queued: clxyz123abc
@@ -76,13 +76,13 @@ Waiting..........
 By default the CLI talks to `http://localhost:3000`. Override with:
 
 ```bash
-MIA_API_URL=https://your-mia-instance.example.com mia research "..."
+MIRA_API_URL=https://your-mira-instance.example.com mira research "..."
 ```
 
 Or export it in your shell profile:
 
 ```bash
-export MIA_API_URL=https://your-mia-instance.example.com
+export MIRA_API_URL=https://your-mira-instance.example.com
 ```
 
 ### Depth
@@ -97,19 +97,19 @@ export MIA_API_URL=https://your-mia-instance.example.com
 Comma-separated list of source slugs. Built-in sources: `reddit`, `hackernews`, `news`.
 
 ```bash
-mia research "query" --sources reddit
-mia research "query" --sources hackernews,news
+mira research "query" --sources reddit
+mira research "query" --sources hackernews,news
 ```
 
 ---
 
 ## Requirements
 
-The CLI requires a running MIA API. Spin one up locally in under 2 minutes:
+The CLI requires a running MIRA API. Spin one up locally in under 2 minutes:
 
 ```bash
-git clone https://github.com/mira-js/mia-core.git
-cd mia-core && cp .env.example .env
+git clone https://github.com/mira-js/mira-api-core.git
+cd mira-core && cp .env.example .env
 # set OPENAI_API_KEY in .env
 docker compose up
 ```
@@ -117,7 +117,3 @@ docker compose up
 Then use the CLI from anywhere.
 
 ---
-
-## Part of mia-core
-
-This package is part of the [mia-core](https://github.com/mira-js/mia-core) monorepo — a self-hostable market intelligence engine.

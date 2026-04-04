@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import type { ResearchJobInput, JobStatus } from '@mia/shared-core'
+import type { ResearchJobInput, JobStatus } from '@mira/shared-core'
 
-const API_BASE = process.env.MIA_API_URL ?? 'http://localhost:3000'
+const API_BASE = process.env.MIRA_API_URL ?? 'http://localhost:3000'
 const POLL_INTERVAL_MS = 2000
 const POLL_TIMEOUT_MS = 5 * 60 * 1000
 
@@ -67,7 +67,7 @@ async function pollJob(jobId: string): Promise<JobResponse> {
 
 function printUsage(): void {
   console.log(`
-Usage: mia research "<query>" [options]
+Usage: mira research "<query>" [options]
 
 Options:
   --depth quick|deep          Research depth (default: quick)
@@ -75,9 +75,9 @@ Options:
   --help                      Show this help
 
 Examples:
-  mia research "CRM pain points"
-  mia research "Notion alternatives" --depth deep
-  mia research "project management" --sources reddit,hackernews
+  mira research "CRM pain points"
+  mira research "Notion alternatives" --depth deep
+  mira research "project management" --sources reddit,hackernews
 `.trim())
 }
 

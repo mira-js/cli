@@ -1,12 +1,12 @@
 {
-  "name": "@mia/cli",
+  "name": "@mira/cli",
   "version": "0.1.0",
   "type": "module",
   "publishConfig": {
     "access": "public"
   },
   "bin": {
-    "mia": "./dist/index.js"
+    "mira": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -15,7 +15,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@mia/shared-core": "workspace:*"
+    "@mira/shared-core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
