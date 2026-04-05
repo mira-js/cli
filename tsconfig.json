@@ -8,5 +8,6 @@
   "references": [
     { "path": "../shared-core" }
   ],
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "types": ["node"]
 }
