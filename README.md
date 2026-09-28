@@ -110,7 +110,7 @@ The CLI requires a running MIRA API. Spin one up locally in under 2 minutes:
 ```bash
 git clone https://github.com/mira-js/mira-api-core.git
 cd mira-core && cp .env.example .env
-# set OPENAI_API_KEY in .env
+# set LLM_API_KEY in .env
 docker compose up
 ```
 
