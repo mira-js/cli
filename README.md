@@ -1,7 +1,7 @@
 # @mira/cli
 
 [![npm](https://img.shields.io/npm/v/@mira/cli)](https://www.npmjs.com/package/@mira/cli)
-[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)](https://github.com/mira-js/mira-core/blob/main/LICENSE)
+[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)](./LICENSE)
 
 Zero-install CLI for the MIRA research API. Enqueues a research job, polls until it completes, and prints the result.
 
@@ -117,3 +117,9 @@ docker compose up
 Then use the CLI from anywhere.
 
 ---
+
+## License
+
+AGPL-3.0-only — see [LICENSE](./LICENSE).
+
+Copyright (C) 2026 Fernando Nieto Pallares

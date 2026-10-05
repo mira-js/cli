@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// SPDX-License-Identifier: AGPL-3.0-only
 import type { ResearchJobInput, JobStatus } from '@mira/shared-core'
 
 const API_BASE = process.env.MIRA_API_URL ?? 'http://localhost:3000'
