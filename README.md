@@ -105,16 +105,7 @@ mira research "query" --sources hackernews,news
 
 ## Requirements
 
-The CLI requires a running MIRA API. Spin one up locally in under 2 minutes:
-
-```bash
-git clone https://github.com/mira-js/mira-api-core.git
-cd mira-core && cp .env.example .env
-# set LLM_API_KEY in .env
-docker compose up
-```
-
-Then use the CLI from anywhere.
+The CLI requires a running MIRA API (see [github.com/mira-js/api](https://github.com/mira-js/api)). Point the CLI at it with `MIRA_API_URL`.
 
 ---
 
