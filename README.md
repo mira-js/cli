@@ -109,6 +109,10 @@ The CLI requires a running MIRA API (see [github.com/mira-js/api](https://github
 
 ---
 
+## Security
+
+For details on reporting security vulnerabilities, see [SECURITY.md](https://github.com/mira-js/.github/blob/main/SECURITY.md) in the mira-js org repository, or use [private vulnerability reporting](https://github.com/mira-js/cli/security/advisories/new) on this repository.
+
 ## License
 
 AGPL-3.0-only — see [LICENSE](./LICENSE).
