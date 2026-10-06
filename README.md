@@ -1,121 +1,108 @@
-# @mira/cli
+<div align="center">
 
-[![npm](https://img.shields.io/npm/v/@mira/cli)](https://www.npmjs.com/package/@mira/cli)
-[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)](./LICENSE)
+# `@mira/cli`
 
-Zero-install CLI for the MIRA research API. Enqueues a research job, polls until it completes, and prints the result.
+**One command from question to answer.**
 
----
-
-## Usage
-
-No install needed:
-
-```bash
-npx @mira/cli research "<query>"
 ```
-
-Or install globally:
-
-```bash
-npm install -g @mira/cli
 mira research "<query>"
 ```
 
----
+[![npm](https://img.shields.io/npm/v/@mira/cli?style=flat-square&color=818cf8&labelColor=0e1320)](https://www.npmjs.com/package/@mira/cli)
+[![license](https://img.shields.io/badge/license-AGPL--3.0-818cf8?style=flat-square&labelColor=0e1320)](./LICENSE)
 
-## Commands
+</div>
 
-### `research`
+<br>
 
-```
-mira research "<query>" [options]
+Posts a research job to a running [`@mira/api-core`](https://github.com/mira-js/api) server, waits for it to finish and prints the result as JSON.
 
-Options:
-  --depth   quick | deep     Research depth (default: quick)
-  --sources <csv>            Comma-separated source list (default: all)
-  --help                     Show help
+## Install
 
-Examples:
-  mira research "CRM pain points for small teams"
-  mira research "Notion alternatives" --depth deep
-  mira research "invoicing frustrations" --sources reddit,hackernews
-  mira research "B2B SaaS pricing anxiety" --depth deep --sources reddit
+```sh
+npm install -g @mira/cli
 ```
 
-**What it does:**
-1. `POST /api/v1/research` — enqueues the job and prints the job ID
-2. Polls `GET /api/v1/research/:jobId` every 2 seconds (dots printed to show progress)
-3. Prints the full `ResearchResult` JSON when the job completes (or exits 1 on failure)
-4. Times out after 5 minutes
+Needs a running Mira API. Point at it with `MIRA_API_URL` (defaults to `http://localhost:3000`).
 
-**Sample session:**
+## Run
 
-```
-$ mira research "indie founders switching from Stripe" --depth quick
-
-Queuing research: "indie founders switching from Stripe" (depth: quick)
-Job queued: clxyz123abc
-Waiting..........
+```console
+$ mira research "invoicing software" --depth quick --sources reddit,hackernews
+Queuing research: "invoicing software" (depth: quick)
+Job queued: 1
+Waiting.....
 
 --- Result ---
 {
-  "query": "indie founders switching from Stripe",
-  "summary": "Founders cite dispute resolution and webhook reliability as...",
-  "painPoints": [...],
-  ...
+  "query": "invoicing software",
+  "summary": "...",
+  "painPoints": [ ... ],
+  "competitorWeaknesses": [ ... ],
+  "emergingGaps": [ ... ],
+  "rawItems": [ ... ]
 }
 ```
 
----
+| Option | |
+|:--|:--|
+| `--depth quick\|deep` | Research depth. Anything else falls back to `quick`. |
+| `--sources a,b` | Comma-separated source slugs. Omit for the server default. |
+| `--help`, `-h` | Print usage. |
 
-## Configuration
+> [!TIP]
+> Progress lines print before the result, so the full output isn't plain JSON. Everything after `--- Result ---` is.
 
-### API endpoint
+## Exit codes
 
-By default the CLI talks to `http://localhost:3000`. Override with:
+| | |
+|:--|:--|
+| `0` | Job completed, or usage printed |
+| `1` | Job failed, timed out, or an HTTP error occurred |
 
-```bash
-MIRA_API_URL=https://your-mira-instance.example.com mira research "..."
+## Where it sits
+
+```mermaid
+flowchart LR
+  cli["cli"] -- HTTP --> api["api-core"]
+  cli -. types .-> shared["shared-core"]
+  api --> services["core-services"]
+  api --> collectors["core-collectors"]
+  services --> shared
+  collectors --> shared
+  classDef here fill:#818cf8,stroke:#a5b4fc,color:#0a0d1a
+  classDef pkg fill:#0e1320,stroke:#2a3250,color:#c7cbe0
+  class cli here
+  class api,services,shared,collectors pkg
 ```
 
-Or export it in your shell profile:
+The CLI talks to the API over HTTP only, and uses `shared-core` for types.
 
-```bash
-export MIRA_API_URL=https://your-mira-instance.example.com
+<details>
+<summary><b>Build from source</b></summary>
+
+<br>
+
+Clone next to `shared` in a pnpm workspace, then:
+
+```sh
+pnpm install
+pnpm --filter @mira/cli build
 ```
 
-### Depth
+The `mira` binary lands in `dist/index.js`.
 
-| `--depth` | What changes |
-|-----------|-------------|
-| `quick` (default) | 25 Reddit posts/subreddit, 20 HN stories |
-| `deep` | 50 Reddit posts/subreddit, 40 HN stories |
+</details>
 
-### Sources
+<br>
 
-Comma-separated list of source slugs. Built-in sources: `reddit`, `hackernews`, `news`.
-
-```bash
-mira research "query" --sources reddit
-mira research "query" --sources hackernews,news
-```
-
----
-
-## Requirements
-
-The CLI requires a running MIRA API (see [github.com/mira-js/api](https://github.com/mira-js/api)). Point the CLI at it with `MIRA_API_URL`.
-
----
-
-## Security
-
-For details on reporting security vulnerabilities, see [SECURITY.md](https://github.com/mira-js/.github/blob/main/SECURITY.md) in the mira-js org repository, or use [private vulnerability reporting](https://github.com/mira-js/cli/security/advisories/new) on this repository.
-
-## License
-
-AGPL-3.0-only — see [LICENSE](./LICENSE).
-Contributions require signing the [CLA](https://github.com/mira-js/.github/blob/main/CLA.md) — see [CONTRIBUTING.md](https://github.com/mira-js/.github/blob/main/CONTRIBUTING.md).
-
+<div align="center">
+<sub>
+Part of <a href="https://github.com/mira-js">Mira's open core</a> ·
+<a href="./LICENSE">AGPL-3.0-only</a> ·
+<a href="https://github.com/mira-js/.github/blob/main/CONTRIBUTING.md">Contributing</a> (<a href="https://github.com/mira-js/.github/blob/main/CLA.md">CLA</a>) ·
+<a href="https://github.com/mira-js/cli/security/advisories/new">Report a vulnerability</a>
+<br>
 Copyright (C) 2026 Fernando Nieto Pallares
+</sub>
+</div>
